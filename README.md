@@ -1,2 +1,4 @@
 # IHMTardiveau
-Projet IHM 
+Projet Scolaire IHM 
+
+Création d'une application android en natif.
