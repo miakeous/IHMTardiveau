@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">tdIhm</string>
+    <string name="activity_main_button_edit">Modifier</string>
+    <string name="activity_edit_button_save">Valider</string>
+    <string name="activity_edit_edittext_name">Nom</string>
+    <string name="item_name_delete_button_desc">Supprimer le nom</string>
+    <string name="item_name_edit_button_desc">Modifier le nom</string>
+</resources>

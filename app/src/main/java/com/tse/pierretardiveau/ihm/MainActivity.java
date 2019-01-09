@@ -1,60 +1,57 @@
 package com.tse.pierretardiveau.ihm;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-
-
-
-    private static final String LOG_TAG =
-            MainActivity.class.getSimpleName();
-    TextView textViewName;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
+    @BindView(R.id.activity_main_button_edit) Button buttonEdit;
+    @BindView(R.id.activity_main_names) RecyclerView namesView;
+    NameAdapter nameAdapter;
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
+        ButterKnife.bind(this);
 
+        nameAdapter = new NameAdapter();
 
+        initList();
 
+        buttonEdit.setOnClickListener(this);
     }
 
-    private void initView(){
-        textViewName = findViewById(R.id.textfield);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        nameAdapter.updateList(DataManager.getInstance().getNameList());
     }
 
-    public TextView getTextViewName() {
-        return textViewName;
-    }
-
-    public void setTextViewName(TextView textViewName) {
-        this.textViewName = textViewName;
-    }
-
-    public void launchSecondActivity(View view) {
-        Log.d(LOG_TAG, "Button clicked!");
-        Intent intent = new Intent(this, FormActivity.class);
-        startActivityForResult(intent,1);
-
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if(resultCode == RESULT_OK) {
-                String myStr=data.getStringExtra("editTextValue");
-                 textViewName.setText(myStr);
-            }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.activity_main_button_edit:
+                Intent intent = new Intent(this, FormActivity.class);
+                startActivity(intent);
+                break;
         }
+    }
+
+    public void initList(){
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        namesView.setLayoutManager(linearLayoutManager);
+        namesView.setAdapter(nameAdapter);
     }
 }

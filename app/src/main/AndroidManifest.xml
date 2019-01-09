@@ -18,16 +18,12 @@
         </activity>
         <activity
             android:name=".FormActivity"
-            android:label="@string/activity2_name"
+
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.tse.pierretardiveau.ihm.MainActivity" />
         </activity>
-        <activity
-            android:name=".NavActivity"
-            android:label="@string/title_activity_nav"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
